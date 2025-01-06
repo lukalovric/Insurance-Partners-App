@@ -22,7 +22,7 @@ namespace InsurancePartner.Repository
         public async Task<IEnumerable<Partner>> GetAllPartnersAsync()
         {
             using var connection = new SqlConnection(_connectionString);
-            return await connection.QueryAsync<Partner>("SELECT Id, CONCAT(FirstName, ' ', LastName) AS FullName, PartnerNumber, CreatedAtUtc, IsForeign, PartnerTypeId, Gender FROM Partners ORDER BY CreatedAtUtc DESC");
+            return await connection.QueryAsync<Partner>("SELECT Id, FirstName, LastName, Address, PartnerNumber, CroatianPIN, PartnerTypeId, CreatedAtUtc, CreateByUser, IsForeign, ExternalCode,  Gender FROM Partners ORDER BY CreatedAtUtc DESC;");
         }
 
         public async Task<Partner> GetPartnerByIdAsync(int id)
@@ -34,7 +34,8 @@ namespace InsurancePartner.Repository
         public async Task<int> CreatePartnerAsync(Partner partner)
         {
             using var connection = new SqlConnection(_connectionString);
-            var sql = "INSERT INTO Partners (FirstName, LastName, Address, PartnerNumber, CroatianPIN, PartnerTypeId, CreatedAtUtc, CreateByUser, IsForeign, ExternalCode, Gender) VALUES (@FirstName, @LastName, @Address, @PartnerNumber, @CroatianPIN, @PartnerTypeId, @CreatedAtUtc, @CreateByUser, @IsForeign, @ExternalCode, @Gender); SELECT CAST(SCOPE_IDENTITY() as int);";
+            var sql = "INSERT INTO Partners (FirstName, LastName, Address, PartnerNumber, CroatianPIN, PartnerTypeId, CreatedAtUtc, CreateByUser, IsForeign, ExternalCode, Gender)" +
+                " VALUES (@FirstName, @LastName, @Address, @PartnerNumber, @CroatianPIN, @PartnerTypeId, @CreatedAtUtc, @CreateByUser, @IsForeign, @ExternalCode, @Gender); SELECT CAST(SCOPE_IDENTITY() as int);";
             return await connection.ExecuteScalarAsync<int>(sql, partner);
         }
     }

@@ -23,7 +23,7 @@ namespace InsurancePartner.WebApi.Controllers
             var newId = await _policyService.CreatePolicyAsync(policy);
             policy.Id = newId;
 
-            return CreatedAtAction("GetPolicyById", new { id = newId }, policy);
+            return Ok(policy);
         }
     }
 }
