@@ -22,5 +22,9 @@ namespace InsurancePartner.Service
         {
             return _policyRepository.CreatePolicyAsync(policy);
         }
+        public Task<bool> HasSpecialMarkAsync(int partnerId)
+        {
+            return _policyRepository.HasSpecialMarkAsync(partnerId);
+        }
     }
 }

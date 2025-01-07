@@ -66,3 +66,12 @@
     background: #ffeeba;
   }
   
+  .partner-list-container .partner-row {
+    transition: background-color 0.3s ease-in-out;
+  }
+  
+  .partner-list-container .partner-row.highlighted {
+    background-color: #d4edda;
+    font-weight: bold;
+  }
+  

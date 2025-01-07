@@ -25,5 +25,11 @@ namespace InsurancePartner.WebApi.Controllers
 
             return Ok(policy);
         }
+        [HttpGet("HasSpecialMark/{partnerId}")]
+        public async Task<IActionResult> HasSpecialMark(int partnerId)
+        {
+            var result = await _policyService.HasSpecialMarkAsync(partnerId);
+            return Ok(result);
+        }
     }
 }

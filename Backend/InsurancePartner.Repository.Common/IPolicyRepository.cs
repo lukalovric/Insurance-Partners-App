@@ -10,6 +10,7 @@ namespace InsurancePartner.Repository.Common
     public interface IPolicyRepository
     {
         Task<int> CreatePolicyAsync(Policy policy);
+        Task<bool> HasSpecialMarkAsync(int PartnerId);
 
     }
 }

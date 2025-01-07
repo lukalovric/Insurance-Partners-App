@@ -1,6 +1,6 @@
 import React, { useState } from 'react';
 import axios from 'axios';
-import './AddPartner.css'; // Import CSS file
+import './AddPartner.css';
 
 function AddPartner() {
   const [partner, setPartner] = useState({
@@ -24,9 +24,10 @@ function AddPartner() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     try {
-      await axios.post('http://localhost:7022/api/Partner', partner);
+      const response = await axios.post('https://localhost:7022/api/Partner', partner);
+      const newId = response.data.id;
       alert('Partner added successfully!');
-      window.location.href = '/';
+      window.location.href = `/?newPartnerId=${newId}`;
     } catch (error) {
       console.error('Error adding partner:', error);
       alert('Failed to add partner.');
